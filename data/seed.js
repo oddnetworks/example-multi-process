@@ -37,10 +37,10 @@ function seedData(bus, objects) {
 
 		const token = jwt.sign(payload, jwtSecret);
 		if (object.type === 'platform') {
-			logger.info(`${object.type}: ${object.id}`);
-			logger.info(`     JWT: ${token}`);
+			logger.debug(`${object.type}: ${object.id}`);
+			logger.debug(`     JWT: ${token}`);
 		} else {
-			logger.info(`${object.type}: ${object.id}`);
+			logger.debug(`${object.type}: ${object.id}`);
 		}
 
 		promises.push(bus.sendCommand(pattern, object));
@@ -53,8 +53,8 @@ module.exports = bus => {
 	return glob('./+(channel|platform)/*.json', {cwd: __dirname})
 		.then(loadFiles)
 		.then(objects => {
-			logger.info(`Loading test Channel and Platforms...`);
-			logger.info(`-------------------------------------`);
+			logger.debug(`Loading test Channel and Platforms...`);
+			logger.debug(`-------------------------------------`);
 			return Promise.all(seedData(bus, objects));
 		});
 };
