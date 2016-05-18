@@ -1,0 +1,26 @@
+{
+  "name": "Oddworks Example Server",
+  "description": "A barebones Oddworks Server running two processes: API and Sync",
+  "repository": "https://github.com/oddnetworks/example-multi-process",
+  "logo": "http://s3-us-west-2.amazonaws.com/odd-networks-assets/odd-networks.png",
+  "keywords": ["node", "odd networks", "oddworks"],
+  "env": {
+    "JWT_SECRET": {
+      "description": "A secret key for generating JWTs for accessing the API.",
+      "generator": "secret"
+    },
+    "VIMEO_API_TOKEN": {
+    	"description": "Your Vimeo user's API token. See https://developer.vimeo.com/api/authentication#generate-tokens"
+    },
+		"GOOGLE_ANALYTICS_ID": {
+			"description": "Your Google Analytics account ID (ie. 'UA-XXXX-XX')"
+		},
+		"SYNC_INTERVAL": {
+			"description": "The interval (in milliseconds) at which the sync provider(s) run",
+			"value": 300000
+		}
+  },
+  "addons": [
+  	"redistogo:nano"
+  ]
+}
