@@ -1,0 +1,18 @@
+{
+	"id": "roku",
+	"type": "platform",
+	"channel": "odd-networks",
+	"platformType": "ROKU",
+	"category": "TV",
+	"active": true,
+	"features": {
+		"authentication": {
+			"enabled": false,
+			"type": "link",
+			"url": "http://oddchannels.com/login"
+		}
+	},
+	"views": {
+		"homepage": "homepage"
+	}
+}
