@@ -1,20 +1,17 @@
 'use strict';
 
 const redis = require('redis');
-const Promise = require('bluebird');
-const winston = require('winston');
+const oddcast = require('oddcast');
 const oddworks = require('@oddnetworks/oddworks');
+const utils = require('./utils');
 
 const StoresUtils = oddworks.storesUtils;
 const ServicesUtils = oddworks.servicesUtils;
 
-const oddcast = require('oddcast');
 const bus = oddcast.bus();
 
 const ENVIRONMENT = process.env.NODE_ENV || 'development';
-const LOG_LEVEL = ENVIRONMENT === 'production' ? 'info' : 'debug';
 const FIVE_MINUTES = 5 * 60 * 1000;
-const UTC_OFFSET = 0;
 const SYNC_INTERVAL = process.env.SYNC_INTERVAL || FIVE_MINUTES;
 
 const VIMEO_API_TOKEN = process.env.VIMEO_API_TOKEN;
@@ -28,24 +25,8 @@ bus.events.use({}, oddcast.inprocessTransport());
 bus.commands.use({}, oddcast.inprocessTransport());
 bus.requests.use({}, oddcast.inprocessTransport());
 
-function setupLogger() {
-	oddworks.logger.configure({
-		transports: [
-			new winston.transports.Console({
-				level: LOG_LEVEL,
-				colorize: true,
-				timestamp() {
-					return new Date().format('YYYY-MM-DDThh:mm:ss.SSSZ', UTC_OFFSET);
-				},
-				handleExceptions: true
-			})
-		]
-	});
-	return Promise.resolve(true);
-}
-
 // Setup logger
-module.exports = setupLogger()
+module.exports = utils.setupLogger(ENVIRONMENT)
 	.then(() => {
 		// Initialize stores
 		StoresUtils.load(bus,

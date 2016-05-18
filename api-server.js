@@ -5,12 +5,15 @@ const boom = require('boom');
 const express = require('express');
 const oddcast = require('oddcast');
 const oddworks = require('@oddnetworks/oddworks');
+const utils = require('./utils');
 
 const StoresUtils = oddworks.storesUtils;
 const ServicesUtils = oddworks.servicesUtils;
 const middleware = oddworks.middleware;
 
 const config = require('./api-config');
+
+const ENVIRONMENT = process.env.NODE_ENV || 'development';
 
 const bus = oddcast.bus();
 const app = express();
@@ -20,14 +23,18 @@ bus.events.use(config.oddcast.events.options, config.oddcast.events.transport);
 bus.commands.use(config.oddcast.commands.options, config.oddcast.commands.transport);
 bus.requests.use(config.oddcast.requests.options, config.oddcast.requests.transport);
 
-module.exports = StoresUtils.load(bus, config.stores)
-	// Initialize stores
+// Setup logger
+module.exports = utils.setupLogger(ENVIRONMENT)
+	.then(() => {
+		// Initialize stores
+		StoresUtils.load(bus, config.stores)
+	})
 	.then(() => {
 		// Initialize services
 		return ServicesUtils.load(bus, config.services);
 	})
-	// Start configuring express
 	.then(() => {
+		// Start configuring express
 		app.disable('x-powered-by');
 		app.set('trust proxy', 'loopback, linklocal, uniquelocal');
 
