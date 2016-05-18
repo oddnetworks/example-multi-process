@@ -13,11 +13,13 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@oddnetworks/oddworks": "^2.2.0",
+    "bluebird": "^3.4.0",
     "foreman": "1.4.1",
     "glob": "^7.0.3",
     "jsonwebtoken": "^6.2.0",
     "oddcast": "^2.0.0",
-    "redis": "^2.6.0-2"
+    "redis": "^2.6.0-2",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.9.1",
