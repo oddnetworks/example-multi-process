@@ -13,7 +13,7 @@ const FIVE_MINUTES = 5 * 60 * 1000;
 const SYNC_INTERVAL = process.env.SYNC_INTERVAL || FIVE_MINUTES;
 
 const VIMEO_API_TOKEN = process.env.VIMEO_API_TOKEN;
-const REDIS_URL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+const REDIS_URL = process.env.REDISTOGO_URL || process.env.REDIS_URL || 'redis://127.0.0.1:6379';
 
 const redisClient = redis.createClient(REDIS_URL);
 const seedData = require('./data/seed');

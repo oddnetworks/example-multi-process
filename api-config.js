@@ -15,7 +15,7 @@ const eventsService = oddworks.services.events;
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 const ENVIRONMENT = process.env.NODE_ENV || 'development';
-const REDIS_URL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+const REDIS_URL = process.env.REDISTOGO_URL || process.env.REDIS_URL || 'redis://127.0.0.1:6379';
 const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || 'UA-XXXX-XX';
 
 const redisClient = redis.createClient(REDIS_URL);
