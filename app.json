@@ -18,6 +18,10 @@
 		"SYNC_INTERVAL": {
 			"description": "The interval (in milliseconds) at which the sync provider(s) run",
 			"value": 300000
+		},
+		"NODE_ENV": {
+			"description": "Your application's Node environment",
+			"value": "production"
 		}
   },
   "addons": [
