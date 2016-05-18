@@ -20,6 +20,14 @@ You can install this to Heroku as-is to get a quick reference API.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+If you have this code locally, you can add your Heroku app as a git remote like so:
+
+		$ git remote add heroku https://git.heroku.com/your-heroku-application-name.git
+
+Then you can push changes like so:
+
+		$ git push heroku master
+
 _*Note_: Auto-deploying on Heroku will automatically generate a new JWT_SECRET environment variable for you. You will need this for generating the JWT (json web token) used in the `x-access-token` header for API requests, or within the various platform SDKs.
 
 ## Local Setup
