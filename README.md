@@ -6,8 +6,7 @@ This is only an example and should not be used in production. You would likely w
 
 This setup uses the following oddworks stores and services:
 
-- __[redis store](https://github.com/oddnetworks/oddworks/tree/master/lib/stores/redis)__
-- __[redis-search store](https://github.com/oddnetworks/oddworks/tree/master/lib/stores/redis-search)__
+- __[firebase store](https://github.com/oddnetworks/oddworks/tree/master/lib/stores/firebase)__
 - __[catalog service](https://github.com/oddnetworks/oddworks/blob/master/lib/services/catalog)__
 - __[events service](https://github.com/oddnetworks/oddworks/blob/master/lib/services/events)__ - with the __[google-analytics analyzer](https://github.com/oddnetworks/oddworks/tree/master/lib/services/events/analyzers)__
 - __[identity service](https://github.com/oddnetworks/oddworks/tree/master/lib/services/identity)__
@@ -46,7 +45,7 @@ We use [foreman](https://www.npmjs.com/package/foreman) to manage multiple node 
 
 You will need the following environment variables before running this example
 
-- `REDIS_URL` - this environment variable will point to a redis instance and will be used with the __redis store__ and the __redis-search store__. The default value is `redis://127.0.0.1:6379` (a local redis instance).
+- `GOOGLE_SERVICE_ACCOUNT` - this environment variable will point to a local JSON file containing the Google Services account information associated with your Firebase instance. For more information, see [oddworks - firebase store](https://github.com/oddnetworks/oddworks/tree/master/lib/store/firebase)
 - `VIMEO_API_TOKEN` - this environment variable will be used to gather the videos associated with the token's Vimeo user account. See [sync providers](https://github.com/oddnetworks/oddworks/tree/master/lib/services/sync/providers) for more details.
 - `GOOGLE_ANALYTICS_ID` - this environment variable is used to send event metrics into the __google-analytics event analyzer__. An example value is `UA-XXXX-XX`
 - `SYNC_INTERVAL` - this environment variable sets the interval (in milliseconds) at which the sync providers will run. The default value is `300000` (five minutes).
@@ -57,13 +56,13 @@ You can set these manually, or you can use __foreman__. [foreman](https://www.np
 An example `.env` file:
 ```
 NODE_ENV=development
-REDIS_URL=redis://127.0.0.1:6379
+GOOGLE_SERVICE_ACCOUNT=path/to/your/google_service_account.json
 VIMEO_API_TOKEN=your-vimeo-api-token
 GOOGLE_ANALYTICS_ID=UA-XXXX_XX
 SYNC_INTERVAL=300000
 JWT_SECRET=your-secret-token
 ```
-_*Note_: You will need real values for `REDIS_URL` and `VIMEO_API_TOKEN`.
+_*Note_: You will need real values for `GOOGLE_SERVICE_ACCOUNT` and `VIMEO_API_TOKEN`.
 
 ### Start
 
